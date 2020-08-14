@@ -1,6 +1,6 @@
 { 
     "baseUrl": "https://project.docksal",
     "env": {
-        "baseUrl": "https://project.docksal"
+        "env1": "var1"
     }
 }

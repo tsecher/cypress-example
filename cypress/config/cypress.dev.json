@@ -1,6 +1,6 @@
 { 
-    "baseUrl": "http://recette.dev.test.lan.net/",
+    "baseUrl": "https://github.com/softeg-klee/cypress-example",
     "env": {
-        "baseUrl": "http://recette.dev.test.lan.net/"
+        "env1": "var1"
     }
 }

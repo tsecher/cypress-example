@@ -1,8 +1,8 @@
 # INSTALLATION
-* At the root of your ptoject, create new directory testing
+* At the root of your project, create new directory testing
 * From testing directory clone project :
 ```bash
-git clone url e2e
+git clone https://github.com/softeg-klee/cypress-example e2e
 # Change directory to e2e 
 cd e2e 
 ```
@@ -31,7 +31,10 @@ to switch between environments settings you need to add steps in order :
      }
     }
 ``` 
- 3. Run you test : npx cypress open --env configFile=ppd
+ 3. Run you test : npx cypress open --env configFile=ppd  
+ 4. Add user PIC-KI to your gitlab project members. this allow jenkins to pull code.
+ 5. Create new job jenkins from existing one cypress_example or use Jenkinsfile ( See http://ki-jenkins.dev.klee.lan.net:8080/job/cypress_example/)
+ 6. From pipeline script Change the url of your gitlab project and the value of configFile=dev if you want to target anothor env.
  
  # Running tests locally
  

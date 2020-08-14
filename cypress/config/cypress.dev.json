@@ -1,0 +1,6 @@
+{ 
+    "baseUrl": "http://recette.dev.test.lan.net/",
+    "env": {
+        "baseUrl": "http://recette.dev.test.lan.net/"
+    }
+}

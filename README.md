@@ -2,7 +2,7 @@
 * At the root of your project, create new directory testing
 * From testing directory clone project :
 ```bash
-git clone https://github.com/softeg-klee/cypress-example e2e
+git clone {project} e2e
 # Change directory to e2e 
 cd e2e 
 ```

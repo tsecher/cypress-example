@@ -33,7 +33,11 @@ class InstallProcessorClass {
      * Run all installer processors.
      */
     async run() {
-        const installers = this._getAllInstallers()
+        let installers = this._getAllInstallers();
+        this.runMandatoryEliglibleInstallers(installers);
+
+        // Filter installers after elligibility done.
+        installers = this._getFilterEligibleInstallers(installers);
         const groups = this._getAllAvailableGroups(installers);
 
         if (groups.length) {
@@ -49,14 +53,20 @@ class InstallProcessorClass {
      * @private
      */
     _getAllInstallers() {
-        const installers = repo.load('installer', null, this.options);
+        return repo.load('installer', null, this.options);
+    }
 
+    /**
+     * Return filtered list of eligible installers.s
+     * @private
+     */
+    _getFilterEligibleInstallers(installers) {
         if (!this.options.test_eligibility) {
             return installers;
         }
 
         return installers.filter(installer => {
-            return typeof installer.isEligible === 'function' && installer.isEligible();
+            return !installer.info()?.mandatory && typeof installer.isEligible === 'function' && installer.isEligible();
         })
     }
 
@@ -78,7 +88,6 @@ class InstallProcessorClass {
                 group.installers = []
                 groups[info.id] = group;
             })
-
 
         const default_group = groups.default ?? {installers: []};
 
@@ -158,6 +167,17 @@ class InstallProcessorClass {
         for (let i in filtered_groups) {
             await this._askInstallersQuestions(filtered_groups[i].installers);
         }
+    }
+
+    /**
+     * Run mandatory eligible tasks.
+     *
+     * @param installers
+     */
+    runMandatoryEliglibleInstallers(installers) {
+        installers
+            .filter(installer => installer.info().mandatory && installer.isEligible())
+            .forEach(installer => installer.install())
     }
 }
 

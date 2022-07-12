@@ -4,6 +4,11 @@ const yargs = require('yargs/yargs');
 const {hideBin} = require('yargs/helpers');
 const args = yargs(hideBin(process.argv)).argv;
 
+/**
+ * Prompts all actions.
+ *
+ * @type {function(*): void}
+ */
 const processInstall = require('./utils/installers/install-processor');
 
 // Define project path

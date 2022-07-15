@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const tfs = require('../../utils/commons/fs-template')
+const lang = require('../../utils/commons/lang')('docksal_command');
+const messenger = require('../../utils/commons/messenger');
 
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
@@ -17,8 +19,8 @@ class DocksalCommandInstaller extends InstallerAbstract {
             ...{
                 id: 'docksal_command',
                 groups: ['dev'],
-                title: "Docksal command",
-                description: "Ajouter une commande docksal pour lancer les tests cypress",
+                title: lang('title'),
+                description: lang('description'),
             }
         };
     }
@@ -51,6 +53,8 @@ class DocksalCommandInstaller extends InstallerAbstract {
                 'cypress_version': this.getCypressVersion(),
             });
         tfs.commit();
+
+        messenger.info(lang('end'));
     }
 
     /**

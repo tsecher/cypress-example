@@ -30,7 +30,9 @@ function getLangValues(){
  *
  * @param ids
  */
-module.exports = function(id){
-    lang_values = lang_values ?? getLangValues();
-    return lang_values[id] ?? id;
+module.exports = function(prefix){
+    return (id) => {
+        lang_values = lang_values ?? getLangValues();
+        return lang_values[`${prefix}.${id}`] ?? `${prefix}.${id}`;
+    }
 }

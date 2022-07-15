@@ -4,7 +4,8 @@ const yargs = require('yargs/yargs');
 const {hideBin} = require('yargs/helpers');
 const args = yargs(hideBin(process.argv)).argv;
 
-const lang = require('./utils/commons/lang');
+const lang = require('./utils/commons/lang')('commons');
+
 const installProcessor = require('./utils/installers/install-processor')
 const messenger = require('./utils/commons/messenger');
 
@@ -25,7 +26,7 @@ if (args['_'].length) {
     prompts([{
         type: 'text',
         name: 'project_path',
-        message: lang('commons.root_project'),
+        message: lang('root_project'),
         initial: project_path,
     }]).then((values) => installProcessor.promptInstall({...options, ...values}))
 }

@@ -1,7 +1,7 @@
 const path = require('path');
 const prompts = require('prompts');
 const repo = require('../commons/entity-repository');
-const lang = require('../commons/lang');
+const lang = require('../commons/lang')('installers');
 const messenger = require('../commons/messenger');
 
 class InstallProcessorClass {
@@ -138,7 +138,7 @@ class InstallProcessorClass {
         const values = await prompts([{
             type: 'multiselect',
             name: 'installers',
-            message: lang('installers.installer_selection_question'),
+            message: lang('installer_selection_question'),
             instructions: false,
             choices: installers.map(installer => {
                 const info = installer.info();
@@ -186,7 +186,7 @@ class InstallProcessorClass {
         const values = await prompts([{
             type: 'multiselect',
             name: 'groups',
-            message: lang("installers.group_selection_question"),
+            message: lang('group_selection_question'),
             instructions: false,
             choices: groups.map(group => {
                 const info = group.info();

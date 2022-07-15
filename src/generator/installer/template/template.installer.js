@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const lang = require('../../utils/commons/lang')('<%= id %>');
+const messenger = require('../../utils/commons/messenger');
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
 class <%= class_name %> extends InstallerAbstract {
@@ -16,8 +18,8 @@ class <%= class_name %> extends InstallerAbstract {
             ...{
                 id: '<%= id %>',
                 groups: ['<%- groups.join("','") %>'],
-                title: "<%= name %>",
-                description: "<%= description %>",
+                title: lang('title'),
+                description: lang('description'),
             }
         };
     }

@@ -60,6 +60,9 @@ class InstallerGenerator extends GeneratorAbstract {
                 name: 'id',
                 message: 'Identifiant de l\'ìnstallateur',
                 required: true,
+                initial: (options) => {
+                    return string_case.snakeCase(options);
+                }
             },
             {
                 type: 'text',

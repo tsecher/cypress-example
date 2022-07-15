@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Run cypress tests in docker
+##
+## Usage: fin cypress/run
+
+docker run -it -v ${PROJECT_ROOT}/<%= dir %>:/e2e -w /e2e cypress/included:<%= cypress_version=>

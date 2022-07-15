@@ -14,6 +14,7 @@ class <%= class_name %> extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
+                id: '<%= id %>',
                 groups: ['<%- groups.join("','") %>'],
                 title: "<%= name %>",
                 description: "<%= description %>",

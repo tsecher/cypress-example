@@ -15,6 +15,7 @@ class SpecsInitInstaller extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
+                id: 'specs_init',
                 groups: ['default'],
                 title: "Répertoire des specification",
                 description: "Construit le repertoires des specs",

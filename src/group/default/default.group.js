@@ -9,7 +9,7 @@ class DefaultGroup {
         return {
             id: 'default',
             title: "Autre",
-            description: "Autre actions",
+            description: "Autres actions",
             weight: 100,
         };
     }

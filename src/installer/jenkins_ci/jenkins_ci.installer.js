@@ -3,7 +3,7 @@ const path = require('path');
 
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
-class GitlabCiInstaller extends InstallerAbstract {
+class JenkinsCiInstaller extends InstallerAbstract {
 
     /**
      * Info.
@@ -14,10 +14,10 @@ class GitlabCiInstaller extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
-                id: 'gitlab_ci',
+                id: 'jenkins_ci',
                 groups: ['ci'],
-                title: "Gitlab CI",
-                description: "Ajout d&#39;une tâche cypress dans le .gitlab-ci.yml",
+                title: "Jenkins CI",
+                description: "Jenkins CI",
             }
         };
     }
@@ -43,4 +43,4 @@ class GitlabCiInstaller extends InstallerAbstract {
 
 }
 
-module.exports = GitlabCiInstaller;
+module.exports = JenkinsCiInstaller;

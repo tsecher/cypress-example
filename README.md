@@ -34,4 +34,50 @@ The npm package brings several advantages:
 - easy to use...
 
 ## How it works
-This project uses `installers` for each actions you want to 
+- This project uses `installers` for each feature you want to add to your project.  
+- Each installer is stand-alone.  
+- The installers can be grouped, and each installer can be present in several groups.  
+- The installers can have an eligibility condition, according to your project. Therefor, an installer
+is not available if the structure of the project does not allow it. In the same way, and depending
+on the type of installer, once the installer has been insalled, it could be not eligible anymore.
+For example, the `docksal_command` installer is not eligible if the project does not contain
+a .docksal directory at root. And the `docksal_command` is no longer eligible once the docksal
+command file has been generated.
+
+### List all installers
+You can list all available installers using the -l options.
+Yellow installers are not eligible to the project.
+```bash
+yarn set-up -l
+```
+
+### Launch the full wizzard of eligible installers
+```bash
+yarn set-up
+```
+
+### Launch a specific list of installers
+You can provide ids to the `yarn set-up` command that will launch only installers and groups
+corresponding to the list of ids.
+```bash
+yarn set-up [installer_1_id] [installer_1_id]
+```
+
+For example :
+```bash
+# For "ci" groups only
+yarn set-up ci
+
+# For "gitlab_ci" installer only
+yarn set-up gitlab_ci
+```
+
+### Force ineligible installers
+You can force ineligible installers to be in the wizzard with the -f options:
+```bash
+yarn set-up -f
+```
+
+
+## Development
+- [For developpers](./doc/developpers/developpers.md)

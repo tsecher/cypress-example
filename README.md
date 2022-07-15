@@ -6,7 +6,7 @@ cd e2e
 ```
 * Install the cypress-example tool with npm or yarn.
 ```bash
-yarn add {repo}
+yarn add https://github.com/tsecher/cypress-example
 ```
 * Set up your project and follow the wizzard.
 ```bash

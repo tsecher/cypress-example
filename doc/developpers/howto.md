@@ -1,4 +1,4 @@
-#How to ? 
+# How to ? 
 
 There is a generator command providning tools to generate each type
 of entity (installer, groups, and generator.

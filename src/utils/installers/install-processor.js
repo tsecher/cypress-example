@@ -37,7 +37,7 @@ class InstallProcessorClass {
      * Run all installer processors.
      */
     async run() {
-        let installers = this._getAllInstallers();
+        let installers = this.getAllInstallers();
         this.runMandatoryEliglibleInstallers(installers);
 
         // Filter installers after elligibility done.
@@ -57,7 +57,7 @@ class InstallProcessorClass {
      * @returns {Promise<void>}
      */
     async runInstallers(ids) {
-        const installers = this._getAllInstallers();
+        const installers = this.getAllInstallers();
 
         const filtered_groups = this._getAllAvailableGroups(installers)
             .filter(group => ids.indexOf(group.info().id) > -1)
@@ -74,10 +74,8 @@ class InstallProcessorClass {
 
     /**
      * Return the list of available installers.
-     *
-     * @private
      */
-    _getAllInstallers() {
+    getAllInstallers() {
         return repo.load('installer', null, this.options);
     }
 
@@ -238,5 +236,25 @@ module.exports.promptInstall = function (options) {
 module.exports.directInstall = function (ids, options) {
     const installProcessor = new InstallProcessorClass(options);
     installProcessor.runInstallers(ids)
+}
+
+/**
+ * List installers.
+ *
+ * @param options
+ */
+module.exports.listInstallers = function (options) {
+    const installProcessor = new InstallProcessorClass(options);
+    installProcessor.getAllInstallers()
+        .forEach(installer => {
+            let info = installer.info();
+            info = `[${info.id}] ${[info.title, info.description].filter(n => n.length).join(' : ')}`
+            if( installer.isEligible() ){
+                messenger.message(info);
+            }
+            else{
+                messenger.warn(`${info} (ineligible)`);
+            }
+        })
 
 }

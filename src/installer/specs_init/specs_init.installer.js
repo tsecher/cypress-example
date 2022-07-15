@@ -55,6 +55,9 @@ class SpecsInitInstaller extends InstallerAbstract {
             {dir: this.getTestDirname()}
         );
         tfs.commit();
+
+        // Message : OK.
+        messenger.info(lang('end'));
     }
 
     /**

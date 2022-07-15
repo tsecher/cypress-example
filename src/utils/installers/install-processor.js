@@ -22,6 +22,7 @@ class InstallProcessorClass {
     getDefaultOptions() {
         return {
             project_path: process.cwd(),
+            test_path: process.cwd(),
             test_eligibility: true,
             installers: {
                 dirs: [path.join(process.cwd(), 'src', 'installers')],

@@ -51,8 +51,8 @@ class SpecsInitInstaller extends InstallerAbstract {
      * @param repoName
      * @returns {string}
      */
-    getSpecRepository(repoName = 'e2e'){
-        return path.join(this.options.project_path, repoName);
+    getSpecRepository(){
+        return path.join(this.options.test_path);
     }
 
 }

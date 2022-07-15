@@ -16,6 +16,7 @@ const project_path = path.resolve(process.cwd(), '../');
 
 const options = {
     test_eligibility: !args.force,
+    test_path: process.cwd(),
 }
 
 prompts([{

@@ -1,0 +1,5 @@
+{
+  "title": "Répertoire des specification",
+  "description": "Initialise le repertoires de définition des tests (cypress.config.js, specs, etc.)",
+  "end": "Le répertoire de tests a été correctement initialisé"
+}

@@ -30,4 +30,3 @@ if (args['_'].length) {
         initial: project_path,
     }]).then((values) => installProcessor.promptInstall({...options, ...values}))
 }
-

@@ -45,7 +45,7 @@ class DocksalCommandInstaller extends InstallerAbstract {
      * @private
      */
     _doInstall() {
-        tfs.copy(
+        tfs.copyTpl(
             path.join(__dirname, 'template'),
             path.join(this.getDocksalCommandPath(), '..'),
             {

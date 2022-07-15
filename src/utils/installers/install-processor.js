@@ -168,7 +168,8 @@ class InstallProcessorClass {
         try {
             installer.install();
         } catch (e) {
-            console.error(`Cannot install : ${installer.info().id}`);
+            messenger.error(`Cannot install : ${installer.info().id} (use -v option for more info) `);
+            messenger.warn(`yarn set-up ${installer.info().id} -v`);
             if (this.options.verbose) {
                 console.log(e);
                 process.exit();

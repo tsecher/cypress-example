@@ -110,7 +110,7 @@ class ConfigurationClass {
     /**
      * Plugin dirs.
      */
-    getPluginDirs() {
+    getPluginDirs(type) {
         const dirs = []
 
         // Plugins.

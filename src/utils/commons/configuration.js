@@ -39,6 +39,7 @@ class ConfigurationClass {
         } else {
             this.conf = {};
             this.set('project_path', '../');
+            this.addPlugin('cypress-example');
         }
 
         return this;

@@ -36,7 +36,7 @@ class ConfigurationClass {
             this.conf = require(this.config_file_path);
         } else {
             this.conf = {};
-            this.set('project_path', path.resolve(process.cwd(), '../'));
+            this.set('project_path', '../');
         }
 
         return this;

@@ -1,10 +1,8 @@
 const yargs = require('yargs/yargs');
 const {hideBin} = require('yargs/helpers');
 const args = yargs(hideBin(process.argv)).argv;
-const conf = require('./utils/commons/configuration');
-
-const installProcessor = require('./utils/installers/install-processor')
-
+const conf = require('./utils/commons/configuration').init();
+const installProcessor = require('./utils/installers/install-processor');
 
 // Define options.
 const options = {

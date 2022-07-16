@@ -6,11 +6,20 @@ class ConfigurationClass {
 
     constructor() {
         this.config_file_path = path.join(process.cwd(), 'installer.config.json');
+    }
+
+    /**
+     * Init conf file.
+     */
+    init() {
         if (fs.existsSync(this.config_file_path)) {
             this.conf = require(this.config_file_path);
         } else {
             this.conf = {};
+            this.set('project_path', path.resolve(process.cwd(), '../'));
         }
+
+        return this;
     }
 
     /**

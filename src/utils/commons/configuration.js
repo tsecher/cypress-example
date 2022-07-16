@@ -61,6 +61,19 @@ class ConfigurationClass {
         )
     }
 
+    /**
+     * Add a plugin in conf.
+     *
+     * @param plugin
+     * @returns {ConfigurationClass}
+     */
+    addPlugin(plugin) {
+        const plugins = conf.get('plugins') || [];
+        plugins.push(plugin);
+        this.set('plugins', plugins);
+        return this;
+    }
+
 }
 
 module.exports = new ConfigurationClass()

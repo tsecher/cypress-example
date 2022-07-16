@@ -68,7 +68,7 @@ class ConfigurationClass {
      * @returns {ConfigurationClass}
      */
     addPlugin(plugin) {
-        const plugins = this.conf.get('plugins') || [];
+        const plugins = this.get('plugins') || [];
         plugins.push(plugin);
         this.set('plugins', plugins);
         return this;

@@ -5,8 +5,27 @@ const path = require('path');
 class ConfigurationClass {
 
     constructor() {
-        this.config_file_path = path.join(process.cwd(), 'installer.config.json');
+        this.config_file_path = this._getConfigFilePathInTree();
         this.init();
+    }
+
+    /**
+     * Return config file path in tree
+     *
+     * @returns {string|string}
+     * @private
+     */
+    _getConfigFilePathInTree() {
+        let config_file_path, dir = process.cwd();
+        do {
+            config_file_path = path.join(dir, 'installer.config.json')
+            dir = dir.split('/')
+            dir.pop()
+            dir = dir.join('/');
+        }
+        while (!fs.existsSync(config_file_path) && dir.length);
+        
+        return fs.existsSync(config_file_path) ? config_file_path : path.join(process.cwd(), 'installer.config.json');
     }
 
     /**

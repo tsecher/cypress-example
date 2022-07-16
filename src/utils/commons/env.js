@@ -1,6 +1,6 @@
 let is_core;
 try {
-    require('cypress-example');
+    require('cypress-example/src/utils/commons.lang.json');
     is_core = false;
 } catch (e) {
     is_core = true;

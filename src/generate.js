@@ -1,3 +1,3 @@
-const conf = require('./utils/commons/configuration').init();
+const conf = require('./utils/commons/configuration');
 const processGenerate = require('./utils/generators/generator-processor');
 processGenerate();

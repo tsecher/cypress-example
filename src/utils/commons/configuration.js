@@ -6,6 +6,7 @@ class ConfigurationClass {
 
     constructor() {
         this.config_file_path = path.join(process.cwd(), 'installer.config.json');
+        this.init();
     }
 
     /**

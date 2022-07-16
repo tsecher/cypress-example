@@ -91,7 +91,7 @@ class ConfigurationClass {
      */
     addPlugin(plugin) {
         const plugins = this.getPlugins()
-        if( plugins.indexOf(plugin) < 0 ){
+        if (plugins.indexOf(plugin) < 0) {
             plugins.push(plugin);
         }
 
@@ -105,6 +105,30 @@ class ConfigurationClass {
      */
     getPlugins() {
         return this.get('plugins') || [];
+    }
+
+    /**
+     * Plugin dirs.
+     */
+    getPluginDirs() {
+        const dirs = []
+
+        // Plugins.
+        this.getPlugins().forEach(
+            plugin => {
+                const dir_path = path.resolve('node_modules', plugin, 'src', type)
+                if (fs.existsSync(dir_path)) {
+                    dirs.push(dir_path);
+                }
+            }
+        )
+
+        // Root.
+        const root = path.join(process.cwd(), 'src', type);
+        if (fs.existsSync(root)) {
+            dirs.push(root);
+        }
+        return dirs;
     }
 
 }

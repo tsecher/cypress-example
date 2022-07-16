@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "set-up": "node src/init.js",
-    "generate": "node src/generate.js"
+    "generate": "node src/generate.js",
+    "postinstall": "node src/postinstall.js"
   },
   "bin": {
     "set-up": "bin/set-up"

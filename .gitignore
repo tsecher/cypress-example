@@ -5,4 +5,4 @@
 # Generated elements in the dev environment should be ignored.
 ./cypress.config.js
 ./cypress
-./installer.config.json
+installer.config.json

@@ -1,9 +1,9 @@
 const prompts = require('prompts');
 const path = require('path');
 const string_case = require('change-case');
-const tfs = require('../../utils/commons/fs-template')
+const tfs = require('<%= path =>/utils/commons/fs-template')
 
-const GeneratorAbstract = require('../../utils/generators/generator.abstract');
+const GeneratorAbstract = require('<%= path =>/utils/generators/generator.abstract');
 
 class <%= class_name %> extends GeneratorAbstract {
 

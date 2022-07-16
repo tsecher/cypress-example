@@ -2,6 +2,7 @@ const prompts = require('prompts');
 const path = require('path');
 const string_case = require('change-case');
 const tfs = require('../../utils/commons/fs-template')
+const env = require('../../utils/commons/env');
 
 const GeneratorAbstract = require('../../utils/generators/generator.abstract');
 const {load} = require("../../utils/commons/entity-repository");
@@ -31,6 +32,7 @@ class InstallerGenerator extends GeneratorAbstract {
     async _doGenerate() {
         // Clean values.
         const values = await this.getValues();
+        values.path = env.src
 
         const input_dir = path.join(__dirname, 'template');
         const output_dir = this.getOutputDir(values);

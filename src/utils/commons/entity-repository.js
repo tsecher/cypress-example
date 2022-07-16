@@ -1,5 +1,6 @@
 const glob = require("glob");
 const path = require("path");
+const fs = require("fs");
 const conf = require("./configuration")
 
 /**
@@ -10,12 +11,22 @@ const conf = require("./configuration")
  */
 function getDirs(type) {
     const dirs = []
+
+    // Plugins.
     conf.getPlugins().forEach(
         plugin => {
             const dir_path = path.resolve('node_modules', plugin, 'src', type)
-            dirs.push(dir_path);
+            if(fs.existsSync(dir_path)){
+                dirs.push(dir_path);
+            }
         }
     )
+
+    // Root.
+    const root = path.join(process.cwd(), 'src', type);
+    if( fs.existsSync(root) ){
+        dirs.push(root);
+    }
     return dirs;
 }
 

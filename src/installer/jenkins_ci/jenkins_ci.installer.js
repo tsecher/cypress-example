@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
+const lang = require('../../utils/commons/lang')('jenkins_ci');
+const messenger = require('../../utils/commons/messenger');
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
-class JenkinsInstaller extends InstallerAbstract {
+class JenkinsCiInstaller extends InstallerAbstract {
 
     /**
      * Info.
@@ -14,9 +16,10 @@ class JenkinsInstaller extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
+                id: 'jenkins_ci',
                 groups: ['ci'],
-                title: "Jenkins",
-                description: "Ajout d&#39;une tache cypress pour jenkins",
+                title: lang('title'),
+                description: lang('description'),
             }
         };
     }
@@ -42,4 +45,4 @@ class JenkinsInstaller extends InstallerAbstract {
 
 }
 
-module.exports = JenkinsInstaller;
+module.exports = JenkinsCiInstaller;

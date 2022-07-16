@@ -14,9 +14,10 @@ class GitlabCiInstaller extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
+                id: 'gitlab_ci',
                 groups: ['ci'],
                 title: "Gitlab CI",
-                description: "Ajout d&#39;une tache cypress dans le .gitlab-ci.yml",
+                description: "Ajout d&#39;une tâche cypress dans le .gitlab-ci.yml",
             }
         };
     }

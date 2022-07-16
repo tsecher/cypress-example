@@ -1,6 +1,8 @@
 const path = require('path');
 const prompts = require('prompts');
 const repo = require('../commons/entity-repository');
+const lang = require('../commons/lang')('installers');
+const messenger = require('../commons/messenger');
 
 class InstallProcessorClass {
 
@@ -26,7 +28,8 @@ class InstallProcessorClass {
             test_eligibility: true,
             installers: {
                 dirs: [path.join(process.cwd(), 'src', 'installers')],
-            }
+            },
+            verbose: false,
         }
     }
 
@@ -34,7 +37,7 @@ class InstallProcessorClass {
      * Run all installer processors.
      */
     async run() {
-        let installers = this._getAllInstallers();
+        let installers = this.getAllInstallers();
         this.runMandatoryEliglibleInstallers(installers);
 
         // Filter installers after elligibility done.
@@ -49,11 +52,30 @@ class InstallProcessorClass {
     }
 
     /**
-     * Return the list of available installers.
-     *
-     * @private
+     * Execute all installers or groups.
+     * @param selected_installers
+     * @returns {Promise<void>}
      */
-    _getAllInstallers() {
+    async runInstallers(ids) {
+        const installers = this.getAllInstallers();
+
+        const filtered_groups = this._getAllAvailableGroups(installers)
+            .filter(group => ids.indexOf(group.info().id) > -1)
+
+        if (filtered_groups.length) {
+            for (let i in filtered_groups) {
+                await this._askInstallersQuestions(filtered_groups[i].installers);
+            }
+        }
+
+        installers.filter(installer => ids.indexOf(installer.info().id) > -1)
+            .forEach(installer => this._installInstaller(installer));
+    }
+
+    /**
+     * Return the list of available installers.
+     */
+    getAllInstallers() {
         return repo.load('installer', null, this.options);
     }
 
@@ -114,7 +136,7 @@ class InstallProcessorClass {
         const values = await prompts([{
             type: 'multiselect',
             name: 'installers',
-            message: 'Quels éléments voulez-vous mettre en place ?',
+            message: lang('installer_selection_question'),
             instructions: false,
             choices: installers.map(installer => {
                 const info = installer.info();
@@ -131,13 +153,26 @@ class InstallProcessorClass {
             .filter(installer => {
                 return values.installers?.indexOf(installer.info().id) > -1;
             })
-            .forEach(installer => {
-                try {
-                    installer.install();
-                } catch (e) {
-                    console.error(`Cannot install : ${installer.info().id}`);
-                }
-            })
+            .forEach(installer => this._installInstaller(installer))
+    }
+
+    /**
+     * Launch installer process.
+     *
+     * @param installer
+     * @private
+     */
+    _installInstaller(installer) {
+        try {
+            installer.install();
+        } catch (e) {
+            messenger.error(`Cannot install : ${installer.info().id} (use -v option for more info) `);
+            messenger.warn(`yarn set-up ${installer.info().id} -v`);
+            if (this.options.verbose) {
+                console.log(e);
+                process.exit();
+            }
+        }
     }
 
     /**
@@ -150,13 +185,13 @@ class InstallProcessorClass {
         const values = await prompts([{
             type: 'multiselect',
             name: 'groups',
-            message: 'Quels type d\'éléments voulez-vous mettre en place ?',
+            message: lang('group_selection_question'),
             instructions: false,
             choices: groups.map(group => {
                 const info = group.info();
                 return {
                     value: info.id,
-                    title: `${info.title} : ${info.description}`,
+                    title: [info.title, info.description].filter(v => v.length).join(' : '),
                     selected: false,
                 }
             })
@@ -166,6 +201,7 @@ class InstallProcessorClass {
         const filtered_groups = groups
             .filter(group => values.groups?.indexOf(group.info().id) > -1);
         for (let i in filtered_groups) {
+            messenger.title(filtered_groups[i].info().title);
             await this._askInstallersQuestions(filtered_groups[i].installers);
         }
     }
@@ -182,7 +218,43 @@ class InstallProcessorClass {
     }
 }
 
-module.exports = function (options) {
+/**
+ * Prompt install process.
+ *
+ * @param options
+ */
+module.exports.promptInstall = function (options) {
     const installProcessor = new InstallProcessorClass(options);
     installProcessor.run();
+}
+
+/**
+ * Direct install process.
+ *
+ * @param options
+ */
+module.exports.directInstall = function (ids, options) {
+    const installProcessor = new InstallProcessorClass(options);
+    installProcessor.runInstallers(ids)
+}
+
+/**
+ * List installers.
+ *
+ * @param options
+ */
+module.exports.listInstallers = function (options) {
+    const installProcessor = new InstallProcessorClass(options);
+    installProcessor.getAllInstallers()
+        .forEach(installer => {
+            let info = installer.info();
+            info = `[${info.id}] ${[info.title, info.description].filter(n => n.length).join(' : ')}`
+            if( installer.isEligible() ){
+                messenger.message(info);
+            }
+            else{
+                messenger.warn(`${info} (ineligible)`);
+            }
+        })
+
 }

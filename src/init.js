@@ -4,24 +4,41 @@ const yargs = require('yargs/yargs');
 const {hideBin} = require('yargs/helpers');
 const args = yargs(hideBin(process.argv)).argv;
 
-/**
- * Prompts all actions.
- *
- * @type {function(*): void}
- */
-const processInstall = require('./utils/installers/install-processor');
+const lang = require('./utils/commons/lang')('commons');
 
-// Define project path
+const installProcessor = require('./utils/installers/install-processor')
+const messenger = require('./utils/commons/messenger');
+
+// Define options.
 const project_path = path.resolve(process.cwd(), '../');
-
 const options = {
     test_eligibility: !args.force,
-    test_path: process.cwd(),
+    verbose: args.v === true
 }
 
+////////////////////////
+///// List all available installers.
+if( args.l || args.list){
+    // Direct install
+    installProcessor.listInstallers();
+    return;
+}
+
+////////////////////////
+///// Launch direct installer
+if (args['_'].length) {
+    options.project_path = project_path;
+
+    // Direct install
+    installProcessor.directInstall(args['_'], options);
+    return;
+}
+
+////////////////////////
+///// Launch available all installer wizzard
 prompts([{
     type: 'text',
     name: 'project_path',
-    message: 'Quel est le répertoire racine du projet ?',
+    message: lang('root_project'),
     initial: project_path,
-}]).then((values) => processInstall({...options, ...values}))
+}]).then((values) => installProcessor.promptInstall({...options, ...values}))

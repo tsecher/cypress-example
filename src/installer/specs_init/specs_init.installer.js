@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const tfs = require('../../utils/commons/fs-template');
+const lang = require('../../utils/commons/lang')('specs_init');
+const messenger = require('../../utils/commons/messenger');
 
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
@@ -15,9 +17,10 @@ class SpecsInitInstaller extends InstallerAbstract {
         return {
             ...super.info(),
             ...{
+                id: 'specs_init',
                 groups: ['default'],
-                title: "Répertoire des specification",
-                description: "Construit le repertoires des specs",
+                title: lang('title'),
+                description: lang('description'),
                 mandatory: true,
             }
         };
@@ -38,23 +41,41 @@ class SpecsInitInstaller extends InstallerAbstract {
      * @private
      */
     _doInstall() {
-        // @todo.
-        tfs.copy(
-            path.join(__dirname,'template'),
-            this.getSpecRepository()
+        // e2e files.
+        tfs.copyTpl(
+            path.join(__dirname, 'template', 'e2e'),
+            this.getSpecRepository(),
+            {}
+        );
+
+        // Git ignore
+        tfs.conditionalAppendOrCreateTpl(
+            path.join(__dirname, 'template', '_.gitignore'),
+            path.join(this.options.project_path, '.gitignore'),
+            {dir: this.getTestDirname()}
         );
         tfs.commit();
+
+        // Message : OK.
+        messenger.info(lang('end'));
     }
 
     /**
+     * Return the test repository path.
      *
      * @param repoName
      * @returns {string}
      */
-    getSpecRepository(){
-        return path.join(this.options.test_path);
+    getSpecRepository() {
+        return path.resolve(this.options.test_path);
     }
 
+    /**
+     * Return the test repertory name.
+     */
+    getTestDirname() {
+        return path.basename(this.options.test_path);
+    }
 }
 
 module.exports = SpecsInitInstaller;

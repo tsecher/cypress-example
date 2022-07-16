@@ -12,8 +12,9 @@
     "set-up": "bin/set-up"
   },
   "dependencies": {
-    "cypress": "^10.3.0",
     "change-case": "^4.1.2",
+    "colors": "^1.4.0",
+    "cypress": "^10.3.0",
     "glob": "^8.0.3",
     "mem-fs": "^2.2.1",
     "mem-fs-editor": "^9.4.0",

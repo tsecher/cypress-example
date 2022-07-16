@@ -40,6 +40,10 @@ class InstallerGenerator extends GeneratorAbstract {
             path.join(input_dir, 'template.installer.js'),
             path.join(output_dir, `${values.id}.installer.js`),
             values);
+        tfs.copyTpl(
+            path.join(input_dir, 'template.lang.json'),
+            path.join(output_dir, `${values.id}.lang.json`),
+            values);
 
         tfs.commit();
     }
@@ -60,6 +64,9 @@ class InstallerGenerator extends GeneratorAbstract {
                 name: 'id',
                 message: 'Identifiant de l\'ìnstallateur',
                 required: true,
+                initial: (options) => {
+                    return string_case.snakeCase(options);
+                }
             },
             {
                 type: 'text',

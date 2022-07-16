@@ -105,7 +105,7 @@ class InstallerGenerator extends GeneratorAbstract {
      * @returns {string}
      */
     getOutputDir(values) {
-        return path.join(__dirname, '..', '..', 'installer', values.id);
+        return path.join(process.cwd(), 'src', 'installer', values.id);
     }
 
 }

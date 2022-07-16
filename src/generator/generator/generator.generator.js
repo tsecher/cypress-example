@@ -89,7 +89,7 @@ class GeneratorGenerator extends GeneratorAbstract {
      * @returns {string}
      */
     getOutputDir(values) {
-        return path.join(__dirname, '../', values.id);
+        return path.join(process.cwd(), 'src', 'generator', values.id);
     }
 }
 

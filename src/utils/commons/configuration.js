@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-
+/**
+ * Configuration helper.
+ */
 class ConfigurationClass {
 
     constructor() {
@@ -24,7 +26,7 @@ class ConfigurationClass {
             dir = dir.join('/');
         }
         while (!fs.existsSync(config_file_path) && dir.length);
-        
+
         return fs.existsSync(config_file_path) ? config_file_path : path.join(process.cwd(), 'installer.config.json');
     }
 
@@ -87,10 +89,21 @@ class ConfigurationClass {
      * @returns {ConfigurationClass}
      */
     addPlugin(plugin) {
-        const plugins = this.get('plugins') || [];
-        plugins.push(plugin);
+        const plugins = this.getPlugins()
+        if( plugins.indexOf(plugin) < 0 ){
+            plugins.push(plugin);
+        }
+
         this.set('plugins', plugins);
         return this;
+    }
+
+    /**
+     * Retourne la liste des plugins dispos
+     * @returns {*|{}|*[]}
+     */
+    getPlugins() {
+        return this.get('plugins') || [];
     }
 
 }

@@ -89,7 +89,7 @@ class InstallerGroupGenerator extends GeneratorAbstract {
      * @returns {string}
      */
     getOutputDir(values) {
-        return path.join(__dirname, '..', '..', 'group', values.id);
+        return path.join(process.cwd(), 'src', 'group', values.id);
     }
 
 }

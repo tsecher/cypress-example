@@ -19,6 +19,7 @@
     "glob": "^8.0.3",
     "mem-fs": "^2.2.1",
     "mem-fs-editor": "^9.4.0",
+    "postinstall": "^0.7.4",
     "prompts": "^2.4.2",
     "yargs": "^17.5.1"
   }

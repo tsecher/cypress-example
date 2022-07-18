@@ -44,7 +44,7 @@ class DocksalCommandInstaller extends InstallerAbstract {
      *
      * @private
      */
-    _doInstall() {
+    async _doInstall() {
         tfs.copyTpl(
             path.join(__dirname, 'template'),
             path.join(this.getDocksalCommandPath(), '..'),
@@ -52,7 +52,7 @@ class DocksalCommandInstaller extends InstallerAbstract {
                 'dir': this.getTestDir(),
                 'cypress_version': this.getCypressVersion(),
             });
-        tfs.commit();
+        await tfs.commit();
 
         messenger.info(lang('end'));
     }

@@ -17,14 +17,14 @@ class InstallerAbstract {
         }
     }
 
-    install() {
+    async install() {
         if (typeof this._doInstall === 'function') {
             const info = this.info();
             console.log("=================");
             console.log(`Install : ${info.title}  (${info.id})`);
             console.log(info.description);
 
-            this._doInstall();
+            await this._doInstall();
         }
     }
 

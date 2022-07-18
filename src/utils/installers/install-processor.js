@@ -38,7 +38,7 @@ class InstallProcessorClass {
      */
     async run() {
         let installers = this.getAllInstallers();
-        this.runMandatoryEliglibleInstallers(installers);
+        await this.runMandatoryEliglibleInstallers(installers);
 
         // Filter installers after elligibility done.
         installers = this._getFilterEligibleInstallers(installers);
@@ -162,9 +162,9 @@ class InstallProcessorClass {
      * @param installer
      * @private
      */
-    _installInstaller(installer) {
+    async _installInstaller(installer) {
         try {
-            installer.install();
+            await installer.install();
         } catch (e) {
             messenger.error(`Cannot install : ${installer.info().id} (use -v option for more info) `);
             messenger.warn(`yarn set-up ${installer.info().id} -v`);
@@ -211,10 +211,12 @@ class InstallProcessorClass {
      *
      * @param installers
      */
-    runMandatoryEliglibleInstallers(installers) {
-        installers
+    async runMandatoryEliglibleInstallers(installers) {
+        const mandatory = installers
             .filter(installer => installer.info().mandatory && installer.isEligible())
-            .forEach(installer => installer.install())
+        for (let i in mandatory) {
+            await this._installInstaller(mandatory[i]);
+        }
     }
 }
 
@@ -249,10 +251,9 @@ module.exports.listInstallers = function (options) {
         .forEach(installer => {
             let info = installer.info();
             info = `[${info.id}] ${[info.title, info.description].filter(n => n.length).join(' : ')}`
-            if( installer.isEligible() ){
+            if (installer.isEligible()) {
                 messenger.message(info);
-            }
-            else{
+            } else {
                 messenger.warn(`${info} (ineligible)`);
             }
         })

@@ -57,7 +57,7 @@ class SpecsInitInstaller extends InstallerAbstract {
             path.join(this.options.project_path, '.gitignore'),
             {dir: this.getTestDirname()}
         );
-        tfs.commit();
+        await tfs.commit();
 
         // Message : OK.
         messenger.info(lang('end'));

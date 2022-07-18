@@ -47,7 +47,3 @@ docker run -it \
   $ARG_NETWORK \
   cypress/included:<%= cypress_version %> \
   $ARG_BASEURL
-
-
-#-------------------------- Snapshot access --------------------------------
-sudo chmod -R 777 ${PROJECT_ROOT}/<%= dir %>/cypress/videos

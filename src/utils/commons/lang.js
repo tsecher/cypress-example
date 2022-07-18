@@ -1,4 +1,5 @@
 let lang_values = null;
+const conf = require('./configuration');
 
 /**
  * Load all languaged values.
@@ -9,18 +10,21 @@ function getLangValues(){
     const path = require('path')
     const glob = require("glob");
     const prefix = '.lang.json';
-    const pattern = path.resolve(__dirname, '..', '..', '**', `*${prefix}`);
-
     const all_values = {};
 
-    glob.sync(pattern).forEach( file => {
-        const file_name = path.basename(file);
-        const local_prefix = file_name.substring(0, file_name.length-(prefix.length));
-        const values = require(file);
-        Object.keys(values).forEach( key => {
-            all_values[`${local_prefix}.${key}`] = values[key];
+    conf.getPluginDirs('').forEach(dir => {
+        const pattern = path.resolve(dir, '**', `*${prefix}`);
+
+        glob.sync(pattern).forEach( file => {
+            const file_name = path.basename(file);
+            const local_prefix = file_name.substring(0, file_name.length-(prefix.length));
+            const values = require(file);
+            Object.keys(values).forEach( key => {
+                all_values[`${local_prefix}.${key}`] = values[key];
+            })
         })
     })
+
 
     return all_values;
 }

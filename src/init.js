@@ -24,8 +24,6 @@ if (args.l || args.list) {
 ////////////////////////
 ///// Launch direct installer
 if (args['_'].length) {
-    options.project_path = project_path;
-
     // Direct install
     installProcessor.directInstall(args['_'], options);
     return;

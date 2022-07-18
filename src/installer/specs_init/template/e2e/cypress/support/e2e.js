@@ -18,3 +18,10 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+<% if(!pass_on_console_error){ %>/**<% } %>
+// Prevents Cypress from failing the test because of console errors.
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+});
+<% if(!pass_on_console_error){ %>*/<% } %>

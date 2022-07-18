@@ -51,6 +51,12 @@ class SpecsInitInstaller extends InstallerAbstract {
             values
         );
 
+        // Git keep.
+        tfs.copy(
+            path.join(__dirname, 'template', 'e2e', '**', '.gitkeep'),
+            this.getSpecRepository(),
+        );
+
         // Git ignore
         tfs.conditionalAppendOrCreateTpl(
             path.join(__dirname, 'template', '_.gitignore'),

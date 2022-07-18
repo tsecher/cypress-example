@@ -6,8 +6,6 @@
 ## Parameters:
 ##  -b|--baseurl|--baseUrl The base url
 
-# Abort if anything fails
-set -e
 
 #-------------------------- ARGUMENTS --------------------------------
 POSITIONAL_ARGS=()
@@ -44,9 +42,12 @@ ARG_BASEURL="--config baseUrl=$BASEURL"
 
 #-------------------------- DOCKER RUN --------------------------------
 docker run -it \
-  -v ${PROJECT_ROOT}/e2e:/e2e \
+  -v ${PROJECT_ROOT}/<%= dir %>:/e2e \
   -w /e2e \
   $ARG_NETWORK \
-  cypress/included:10.3.0 \
+  cypress/included:<%= cypress_version %> \
   $ARG_BASEURL
 
+
+#-------------------------- Snapshot access --------------------------------
+sudo chmod -R 777 ${PROJECT_ROOT}/<%= dir %>/cypress/videos

@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const lang = require('../../utils/commons/lang')('<%= id %>');
-const messenger = require('../../utils/commons/messenger');
-const InstallerAbstract = require('../../utils/installers/installer.abstract');
+const lang = require('<%= path %>/utils/commons/lang')('<%= id %>');
+const messenger = require('<%= path %>/utils/commons/messenger');
+const InstallerAbstract = require('<%= path %>/utils/installers/installer.abstract');
 
 class <%= class_name %> extends InstallerAbstract {
 

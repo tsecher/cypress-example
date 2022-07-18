@@ -3,5 +3,50 @@
 ## Run cypress tests in docker
 ##
 ## Usage: fin cypress/run
+## Parameters:
+##  -b|--baseurl|--baseUrl The base url
 
-docker run -it -v ${PROJECT_ROOT}/<%= dir %>:/e2e -w /e2e cypress/included:<%= cypress_version %>
+# Abort if anything fails
+set -e
+
+#-------------------------- ARGUMENTS --------------------------------
+POSITIONAL_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -b|--baseurl|--baseUrl)
+      BASEURL="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+
+#-------------------------- Init base url --------------------------------
+if [ -z "$BASEURL" ]; then
+  BASEURL="http://${COMPOSE_PROJECT_NAME_SAFE}_web_1"
+  # Add docksal network.
+  ARG_NETWORK="--net=${COMPOSE_PROJECT_NAME_SAFE}_default "
+fi
+ARG_BASEURL="--config baseUrl=$BASEURL"
+
+
+#-------------------------- DOCKER RUN --------------------------------
+docker run -it \
+  -v ${PROJECT_ROOT}/e2e:/e2e \
+  -w /e2e \
+  $ARG_NETWORK \
+  cypress/included:10.3.0 \
+  $ARG_BASEURL
+

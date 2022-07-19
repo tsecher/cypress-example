@@ -8,9 +8,9 @@
   "type.parallelize.description": "Les tests peuvent être exécutées simultanément, par groupes",
   "stage.question": "Sur quel stage voulez-vous lancer le job?",
   "stage.other": "Autre...",
-  "todo": "Vous devez paramétrez vos variables de gitlab CI/CD pour finaliser les actions suivantes",
-  "todo_0_define_stage": "TODO : Définir le stage si nécessaire.",
-  "todo_1_define_base_url": "TODO1 : Fournir la base Url de test.",
-  "todo_2_define_env_variables": "TODO2 : Fournir les variables d'environnement.",
-  "todo_3_define_rule": "TODO3 : Définir les rules qui déclenchent les tests."
+  "todo_define_stage": "1. Définir le stage si nécessaire.",
+  "todo_define_rule": "2. Définir les rules qui déclenchent les tests.",
+  "todo_gitlab_ci_settings": "Vous devez paramétrez vos variables de gitlab CI/CD pour finaliser les actions suivantes (gitlab-ci > Settings > CI/CD > Variables)",
+  "todo_define_base_url": "3. Fournir la base Url de test.",
+  "todo_define_env_variables": "4. Fournir les variables d'environnement."
 }

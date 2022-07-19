@@ -3,7 +3,7 @@ stages:
   - e2e
 <% } %>
 
-## CYPRESS
+# ---- CYPRESS E2E ----
 cypress:rui:
   stage: <%= stage %>
   image:
@@ -13,7 +13,7 @@ cypress:rui:
     - | 
       cypress run \
         --project ./<%= dir %> \
-#       <%= todo_1_define_base_url %>
+#       <%= todo_define_base_url %>
         --config baseUrl=${RUI_URL}
   artifacts:
     when: always
@@ -22,7 +22,7 @@ cypress:rui:
       - ./tests/cypress/screenshots/**/*.png
     expire_in: 1 day
   rules:
-#     <%= todo_3_define_rule %>
-#     Ex. - if: '( $CI_COMMIT_BRANCH == "develop" )'
+#     <%= todo_define_rule %>
+#     - if: '( $CI_COMMIT_BRANCH == "develop" )'
   tags:
     - <%= stage %>

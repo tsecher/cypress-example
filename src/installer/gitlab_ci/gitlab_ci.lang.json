@@ -1,0 +1,15 @@
+{
+  "title": "Gitlab CI",
+  "description": "Ajout d'une tâche cypress dans le .gitlab-ci.yml",
+  "type.question": "Quel type d'intégration voulez-vous mettre en place ?",
+  "type.serialize": "Sérialisée",
+  "type.serialize.description": "Tous les tests sont exécutés en série (à la suite, les uns des autres)",
+  "type.parallelize": "Parallélisée",
+  "type.parallelize.description": "Les tests peuvent être exécutées simultanément, par groupes",
+  "stage.question": "Sur quel stage voulez-vous lancer le job?",
+  "stage.other": "Autre...",
+  "todo": "Vous devez paramétrez vos variables de gitlab CI/CD pour finaliser les actions suivantes",
+  "todo_1_define_base_url": "TODO1 : Fournir la base Url de test.",
+  "todo_2_define_env_variables": "TODO2 : Fournir les variables d'environnement.",
+  "todo_3_define_rule": "TODO3 : Définir les rules qui déclenchent les tests."
+}

@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+
 const tfs = require('../../utils/commons/fs-template')
 const lang = require('../../utils/commons/lang')('docksal_command');
 const messenger = require('../../utils/commons/messenger');
-
+const variables = require('../../utils/commons/variables');
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
 class DocksalCommandInstaller extends InstallerAbstract {
@@ -49,8 +50,8 @@ class DocksalCommandInstaller extends InstallerAbstract {
             path.join(__dirname, 'template'),
             path.join(this.getDocksalCommandPath(), '..'),
             {
-                'dir': this.getTestDir(),
-                'cypress_version': this.getCypressVersion(),
+                ...this.options,
+                ...variables,
             });
         await tfs.commit();
 
@@ -71,20 +72,6 @@ class DocksalCommandInstaller extends InstallerAbstract {
      */
     getDocksalCommandPath() {
         return path.join(this.getDocksalRepPath(), 'commands', 'cypress', 'run')
-    }
-
-    /**
-     * Return the current cypress version in package.json
-     */
-    getCypressVersion() {
-        return require('cypress/package.json').version
-    }
-
-    /**
-     * Return the test repertory name.
-     */
-    getTestDir() {
-        return path.basename(this.options.test_path);
     }
 
 }

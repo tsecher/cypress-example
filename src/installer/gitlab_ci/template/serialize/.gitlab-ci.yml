@@ -1,4 +1,4 @@
-<% if(create_stage){ %>
+<% if(create_file){ %>
 stages:
   - e2e
 <% } %>
@@ -10,10 +10,11 @@ cypress:rui:
     name: cypress/included:<%= cypress_version %>
     entrypoint: [ "" ]
   script:
-    - cypress run \
-      --project ./<%= dir %> \ 
-#     <%= todo_1_define_base_url %>
-#      --config baseUrl=${RUI_URL}
+    - | 
+      cypress run \
+        --project ./<%= dir %> \
+#       <%= todo_1_define_base_url %>
+        --config baseUrl=${RUI_URL}
   artifacts:
     when: always
     paths:

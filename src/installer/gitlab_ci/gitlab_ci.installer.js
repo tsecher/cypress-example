@@ -144,6 +144,7 @@ class GitlabCiInstaller extends InstallerAbstract {
                     required: true,
                 }
             ])
+            values.create_stage = true;
         }
 
         return values;
@@ -157,8 +158,9 @@ class GitlabCiInstaller extends InstallerAbstract {
      */
     async _installSerialize(values) {
         const file_path = this.getGitlabFilePath();
-        values.create_stage = !fs.existsSync(file_path);
+        values.create_file = !fs.existsSync(file_path);
 
+        // Update or create .gitlab-ci.yml.
         tfs.conditionalAppendOrCreateTpl(
             path.join(__dirname, 'template', values.type, '.gitlab-ci.yml'),
             file_path,

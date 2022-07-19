@@ -1,4 +1,7 @@
-
+<% if(create_stage){ %>
+stages:
+  - e2e
+<% } %>
 
 ## CYPRESS
 cypress:rui:

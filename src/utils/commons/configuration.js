@@ -38,7 +38,16 @@ class ConfigurationClass {
             this.conf = require(this.config_file_path);
         } else {
             this.conf = {};
-            this.set('project_path', '../');
+            const prompts = require('prompts');
+            const values = await prompts([
+                {
+                    type: 'text',
+                    name: 'project_path',
+                    initial: path.resolve('../'),
+                    message: 'Répertoire principal du projet git',
+                }
+            ])
+            this.set('project_path', values.project_path);
             this.addPlugin('cypress-example');
         }
 

@@ -39,7 +39,7 @@ class <%= class_name %> extends InstallerAbstract {
      *
      * @private
      */
-    _doInstall() {
+    async _doInstall() {
         // @todo.
     }
 

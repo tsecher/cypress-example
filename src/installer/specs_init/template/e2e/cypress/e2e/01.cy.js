@@ -1,5 +1,6 @@
-describe('empty spec', () => {
+describe(`Fetch ${Cypress.config('baseUrl')}`, () => {
   it('passes', () => {
-    cy.visit('https://example.cypress.io')
+    // Try to reach base url.
+    cy.visit('/')
   })
 })

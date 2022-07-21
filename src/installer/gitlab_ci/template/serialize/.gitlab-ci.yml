@@ -1,0 +1,28 @@
+<% if(create_file){ %>
+stages:
+  - e2e
+<% } %>
+
+# ---- CYPRESS E2E ----
+cypress:rui:
+  stage: <%= stage %>
+  image:
+    name: cypress/included:<%= cypress_version %>
+    entrypoint: [ "" ]
+  script:
+    - | 
+      cypress run \
+        --project ./<%= dir %> \
+#       <%= todo_define_base_url %>
+        --config baseUrl=${RUI_URL}
+  artifacts:
+    when: always
+    paths:
+      - ./tests/cypress/videos/**/*.mp4
+      - ./tests/cypress/screenshots/**/*.png
+    expire_in: 1 day
+  rules:
+#     <%= todo_define_rule %>
+#     - if: '( $CI_COMMIT_BRANCH == "develop" )'
+  tags:
+    - <%= stage %>

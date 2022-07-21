@@ -65,7 +65,7 @@ class SpecsInitInstaller extends InstallerAbstract {
         tfs.conditionalAppendOrCreateTpl(
             path.join(__dirname, 'template', '_.gitignore'),
             path.join(this.options.project_path, '.gitignore'),
-            {dir: this.getTestDirname()}
+            values
         );
         await tfs.commit();
 

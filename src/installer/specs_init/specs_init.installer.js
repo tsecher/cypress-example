@@ -105,6 +105,12 @@ class SpecsInitInstaller extends InstallerAbstract {
                 active: 'oui',
                 inactive: 'non'
             },
+            {
+                type: 'text',
+                name: 'default_base_url',
+                message: lang('default_base_url'),
+                validate: value => value.length,
+            },
         ]);
     }
 }

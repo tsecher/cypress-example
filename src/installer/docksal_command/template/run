@@ -19,4 +19,5 @@ docker run -it \
   -w /e2e \
   $ARG_NETWORK \
   cypress/included:<%= cypress_version %> \
-  $ARG_BASEURL
+  $ARG_BASEURL \
+  $ARG_SPEC \

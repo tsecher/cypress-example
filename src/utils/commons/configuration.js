@@ -8,7 +8,9 @@ class ConfigurationClass {
 
     constructor() {
         this.config_file_path = this._getConfigFilePathInTree();
-        this.init();
+        if (fs.existsSync(this.config_file_path)) {
+            this.conf = require(this.config_file_path);
+        }
     }
 
     /**
@@ -33,25 +35,20 @@ class ConfigurationClass {
     /**
      * Init conf file.
      */
-    init() {
-        if (fs.existsSync(this.config_file_path)) {
-            this.conf = require(this.config_file_path);
-        } else {
-            this.conf = {};
-            const prompts = require('prompts');
-            const values = await prompts([
-                {
-                    type: 'text',
-                    name: 'project_path',
-                    initial: path.resolve('../'),
-                    message: 'Répertoire principal du projet git',
-                }
-            ])
-            this.set('project_path', values.project_path);
-            this.addPlugin('cypress-example');
+    async setup() {
+        if (this.conf){
+            return;
         }
 
-        return this;
+        this.conf = {};
+        const values = await require('prompts')([{
+            type: 'text',
+            name: 'project_path',
+            initial: '../',
+            message: 'Répertoire principal du projet git (relatif)',
+        }])
+        this.set('project_path', values.project_path);
+        this.addPlugin('cypress-example');
     }
 
     /**
@@ -142,4 +139,4 @@ class ConfigurationClass {
 
 }
 
-module.exports = new ConfigurationClass()
+module.exports = new ConfigurationClass();

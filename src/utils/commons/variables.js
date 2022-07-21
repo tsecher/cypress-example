@@ -1,17 +1,18 @@
-const path = require("path");
+const path = require('path');
+const conf = require('./configuration');
 
 /**
  * Return the current cypress version in package.json
  */
 function getCypressVersion() {
-    return require('cypress/package.json').version
+    return require('cypress/package.json').version;
 }
 
 /**
  * Return the test repertory name.
  */
 function getTestDir() {
-    return path.basename(process.cwd());
+    return path.relative(conf.get('project_path'), process.cwd());
 }
 
 

@@ -4,6 +4,7 @@ const tfs = require('../../utils/commons/fs-template');
 const lang = require('../../utils/commons/lang')('specs_init');
 const messenger = require('../../utils/commons/messenger');
 const prompts = require('prompts');
+const variables = require('../../utils/commons/variables');
 
 const InstallerAbstract = require('../../utils/installers/installer.abstract');
 
@@ -42,7 +43,10 @@ class SpecsInitInstaller extends InstallerAbstract {
      * @private
      */
     async _doInstall() {
-        const values = await this._getValues();
+        const values = {
+            ...variables,
+            ...await this._getValues(),
+        };
 
         // e2e files.
         tfs.copyTpl(

@@ -6,11 +6,13 @@
   "license": "MIT",
   "scripts": {
     "set-up": "node src/init.js",
-    "generate": "node src/generate.js"
+    "generate": "node src/generate.js",
+    "init-wsl": "node src/init-wsl.js"
   },
   "bin": {
     "set-up": "bin/set-up",
-    "generate": "bin/generate"
+    "generate": "bin/generate",
+    "init-wsl": "bin/init-wsl"
   },
   "dependencies": {
     "change-case": "^4.1.2",
@@ -19,6 +21,7 @@
     "glob": "^8.0.3",
     "mem-fs": "^2.2.1",
     "mem-fs-editor": "^9.4.0",
+    "os": "^0.1.2",
     "postinstall": "^0.7.4",
     "prompts": "^2.4.2",
     "yaml": "^2.1.1",

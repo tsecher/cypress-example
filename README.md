@@ -11,7 +11,8 @@ yarn add https://github.com/tsecher/cypress-example
 * Set up your project and follow the wizzard.
 ```bash
 yarn set-up
-```  
+```
+
 
 ## Purpose
 This project aims to provide tools to easily plug any project with cypress.
@@ -19,10 +20,10 @@ It provides several generators that allow you to generate pre-configured files
 easily.
 ### List of goals :
 For example (to be enhanced / updated) : 
-- [] Generate specs and cypress.config.js without IHM.
+- [x] Generate specs and cypress.config.js.
 - [x] Generate a docksal command (only available for docksal projects)
 - [x] Set-up .git_ignore file ( )
-- [] Provide default ci configuration files ()
+- [x] Provide default ci configuration files ()
 - [] Provide several basic testing according to project type (Ex. Drupal basics testing). 
 
 ### Why a npm package ?
@@ -78,6 +79,9 @@ You can force ineligible installers to be in the wizzard with the -f options:
 yarn set-up -f
 ```
 
+
+## Integration
+- [WSL2](./doc/integration/wsl.md)
 
 ## Development
 - [For developpers](./doc/developpers/developpers.md)

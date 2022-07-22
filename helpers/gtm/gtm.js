@@ -12,14 +12,14 @@ export const ALIAS_GTM_SCRIPT_LOAD = `@${GTM_SCRIPT_LOAD_ID}`;
  */
 export const listenGTMScriptLoad = (url = 'https://www.googletagmanager.com/gtm.js?*') => {
   cy.intercept(
-    url,
-    {middleware: true},
-    (req) => {
-      req.on('before:response', (res) => {
-        // force all API responses to not be cached
-        res.headers['cache-control'] = 'no-cache';
-      });
-    }
+      url,
+      {middleware: true},
+      (req) => {
+        req.on('before:response', (res) => {
+          // force all API responses to not be cached
+          res.headers['cache-control'] = 'no-cache';
+        });
+      }
   ).as(GTM_SCRIPT_LOAD_ID);
 };
 
@@ -36,11 +36,18 @@ export const dataLayerShouldContain = (data) => {
   cy.window().then(win => {
     assert.isDefined(win.dataLayer);
 
+    // Change data in json.
+    const search = {};
+    Object.keys(data).forEach(key => {
+      search[key] = JSON.stringify(data[key]);
+    });
+
+    // Look into window.dataLayer
     assert.isDefined(win.dataLayer.find(x => {
-      const keys = Object.keys(data);
+      const keys = Object.keys(search);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        if (x[key] !== data[key]) {
+        if (x[key] && JSON.stringify(x[key]) !== search[key]) {
           return false;
         }
       }

@@ -24,7 +24,7 @@ For example (to be enhanced / updated) :
 - [x] Generate a docksal command (only available for docksal projects)
 - [x] Set-up .git_ignore file ( )
 - [x] Provide default ci configuration files ()
-- [] Provide several basic testing according to project type (Ex. Drupal basics testing). 
+- [x] Provide several basic testing according to project type (Ex. Drupal basics testing). 
 
 ### Why a npm package ?
 The npm package brings several advantages:
@@ -79,6 +79,9 @@ You can force ineligible installers to be in the wizzard with the -f options:
 yarn set-up -f
 ```
 
+## Helpers
+This project provide a list of helpers : 
+- [helpers](./helpers/readme.md);
 
 ## Integration
 - [WSL2](./doc/integration/wsl.md)

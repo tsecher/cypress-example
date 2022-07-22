@@ -1,7 +1,7 @@
 {
   "name": "cypress-example",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "helper.js",
   "author": "tsecher <thomas.secher@kleegroup.com>",
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,6 @@
   "dependencies": {
     "change-case": "^4.1.2",
     "colors": "^1.4.0",
-    "cypress": "^10.3.0",
     "glob": "^8.0.3",
     "mem-fs": "^2.2.1",
     "mem-fs-editor": "^9.4.0",

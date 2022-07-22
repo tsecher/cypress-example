@@ -2,7 +2,7 @@
 
 ## Use
 ```javascript
-import {conf} from 'cypress-example'
+import {conf} from 'cypress-example/helpers'
 ```
 
 ## Methods

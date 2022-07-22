@@ -2,7 +2,7 @@
 
 ## Use
 ```javascript
-import {didomi} from 'cypress-example'
+import {didomi} from 'cypress-example/helpers'
 ```
 
 ## Methods

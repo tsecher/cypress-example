@@ -3,7 +3,7 @@
 ## Use
 
 ```javascript
-import {gtm} from 'cypress-example'
+import {gtm} from 'cypress-example/helpers'
 
 describe('GTM Events', () => {
     it('Should add Event in GTM', () => {

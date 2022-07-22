@@ -1,5 +1,6 @@
 # Helpers.
 
-- [conf](./configuration/readme.md)
+
+- [conf](./conf/readme.md)
 - [didomi](./didomi/readme.md)
 - [gtm](./gtm/readme.md)

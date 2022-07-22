@@ -83,6 +83,20 @@ yarn set-up -f
 This project provide a list of helpers : 
 - [helpers](./helpers/readme.md);
 
+### Generate a new helper : 
+
+1. Use generator : 
+```bash
+yarn generate
+```
+2. Choose : `Helper  (HelperGenerator)`
+3. Declare a name
+4. Several files are automatically generated :
+  - ./helpers/{new_helper}/
+  - ./helpers/readme.md (auto populated)
+  - ./helpers.js (auto populated)
+5. Do not forget to write the ./helpers/{new_helper}/readme.md ;)
+
 ## Integration
 - [WSL2](./doc/integration/wsl.md)
 

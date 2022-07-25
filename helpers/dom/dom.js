@@ -11,6 +11,6 @@ export const links = _links;
 /**
  * Aggregator
  */
-export const {
+export const dom = {
     links: _links,
 }

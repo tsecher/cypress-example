@@ -40,4 +40,5 @@ Test if window.dataLayer contains passed data.
 | Param | Type | Description |
 | ----- | :--: | ----------- |
 | data | `object` | Object to test |
+| verbose | `Boolean` | Display verbose |
 

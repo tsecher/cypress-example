@@ -10,9 +10,11 @@ cypress:rui:
     name: cypress/included:<%= cypress_version %>
     entrypoint: [ "" ]
   script:
+    - cd ./<%= dir %>
+    - yarn
     - | 
-      cypress run \
-        --project ./<%= dir %> \
+      yarn cypress run \
+        --project . \
 #       <%= todo_define_base_url %>
         --config baseUrl=${RUI_URL}
   artifacts:

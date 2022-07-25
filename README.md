@@ -11,7 +11,8 @@ yarn add https://github.com/tsecher/cypress-example
 * Set up your project and follow the wizzard.
 ```bash
 yarn set-up
-```  
+```
+
 
 ## Purpose
 This project aims to provide tools to easily plug any project with cypress.
@@ -19,11 +20,11 @@ It provides several generators that allow you to generate pre-configured files
 easily.
 ### List of goals :
 For example (to be enhanced / updated) : 
-- [] Generate specs and cypress.config.js without IHM.
+- [x] Generate specs and cypress.config.js.
 - [x] Generate a docksal command (only available for docksal projects)
 - [x] Set-up .git_ignore file ( )
-- [] Provide default ci configuration files ()
-- [] Provide several basic testing according to project type (Ex. Drupal basics testing). 
+- [x] Provide default ci configuration files ()
+- [x] Provide several basic testing according to project type (Ex. Drupal basics testing). 
 
 ### Why a npm package ?
 The npm package brings several advantages:
@@ -78,6 +79,26 @@ You can force ineligible installers to be in the wizzard with the -f options:
 yarn set-up -f
 ```
 
+## Helpers
+This project provide a list of helpers : 
+- [helpers](./helpers/readme.md);
+
+### Generate a new helper : 
+
+1. Use generator : 
+```bash
+yarn generate
+```
+2. Choose : `Helper  (HelperGenerator)`
+3. Declare a name
+4. Several files are automatically generated :
+  - ./helpers/{new_helper}/
+  - ./helpers/readme.md (auto populated)
+  - ./helpers.js (auto populated)
+5. Do not forget to write the ./helpers/{new_helper}/readme.md ;)
+
+## Integration
+- [WSL2](./doc/integration/wsl.md)
 
 ## Development
 - [For developpers](./doc/developpers/developpers.md)

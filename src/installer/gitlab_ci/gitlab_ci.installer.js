@@ -97,7 +97,7 @@ class GitlabCiInstaller extends InstallerAbstract {
         // Check gitlab-ci file.
         if (fs.existsSync(this.getGitlabFilePath())) {
             const content = yaml.parse(fs.readFileSync(this.getGitlabFilePath(), 'utf8'));
-            default_values.stages = content.stages;
+            default_values.stages = content?.stages || [];
         }
 
         return default_values;

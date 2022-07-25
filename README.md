@@ -81,7 +81,7 @@ yarn set-up -f
 
 ## Helpers
 This project provide a list of helpers : 
-- [helpers](./helpers/readme.md);
+- [helpers](./helpers/readme.md)
 
 ### Generate a new helper : 
 

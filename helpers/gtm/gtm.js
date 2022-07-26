@@ -32,8 +32,12 @@ export const listenGTMScriptLoad = (url = 'https://www.googletagmanager.com/gtm.
  * @param data
  *   The DataLayer attempted object part
  */
-export const dataLayerShouldContain = (data) => {
+export const dataLayerShouldContain = (data, verbose = false) => {
     cy.window().then(win => {
+        verbose && console.info("===========================");
+        verbose && console.info("Data Layer should contain ", data);
+        verbose && console.log("Data layer values ", win.dataLayer);
+
         assert.isDefined(win.dataLayer);
 
         // Change data in json.
@@ -43,11 +47,34 @@ export const dataLayerShouldContain = (data) => {
             search[key] = JSON.stringify(data[key]);
         });
 
-        // Look into window.dataLayer
-        assert.isDefined(win.dataLayer.find(x => {
-            const includes = keys.filter(key => x[key] && JSON.stringify(x[key]) && search[key]);
 
-            return includes.length === keys.length;
-        }));
+        const dataLayerShouldContainDataPart = win.dataLayer.find(x => {
+            verbose && console.log('------------');
+            verbose && console.log('Data Layer Item ', x);
+            const logs = {};
+            const includes = keys.filter(key => {
+                // Logs (verbose).
+                const log = {};
+                log['Value'] = x[key];
+                log['Wanted'] = data[key];
+                log['Comparison : Value (JSON)'] = JSON.stringify(x[key]);
+                log['Comparison : Data (JSON)'] = search[key];
+                log['Matches ?'] = x[key] && JSON.stringify(x[key]) === search[key];
+                logs[key] = log;
+
+                return log['Matches ?'];
+            });
+            logs.null = {};
+
+            const itemMatches = includes.length === keys.length;
+            verbose && console.table(logs);
+            verbose && (itemMatches ?
+                console.log('%c Matching', 'background: #4B9A48; color: white') :
+                console.log('%c Not matching ', 'background: #D53B3B; color: white'));
+
+            return itemMatches;
+        })
+
+        assert.isDefined(dataLayerShouldContainDataPart);
     });
 };

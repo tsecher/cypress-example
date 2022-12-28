@@ -21,3 +21,4 @@ docker run -it \
   cypress/included:<%= cypress_version %> \
   $ARG_BASEURL \
   $ARG_SPEC \
+  $ARG_ENV \

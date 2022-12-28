@@ -21,6 +21,11 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
       ;;
+    -e|--env)
+      ENV="$2"
+      shift # past argument
+      shift # past value
+      ;;
     -*|--*)
       echo "Unknown option $1"
       exit 1
@@ -58,4 +63,9 @@ fi
 #-------------------------- Browser --------------------------------
 if [ -n "$BROWSER" ]; then
   ARG_BROWSER="--browser $BROWSER"
+fi
+
+#-------------------------- ENV variables --------------------------------
+if [ -n "$ENV" ]; then
+  ARG_ENV="--env $ENV"
 fi

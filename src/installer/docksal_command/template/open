@@ -18,3 +18,4 @@ cd <%= dir %>
 yarn cypress open \
  $ARG_BASEURL \
  $ARG_BROWSER \
+ $ARG_ENV \
